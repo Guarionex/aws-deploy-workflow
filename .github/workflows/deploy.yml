@@ -42,7 +42,7 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          aws eks --region ${{ secrets.AWS_REGION }} update-kubeconfig --name your-cluster-name
+          aws eks --region ${{ secrets.AWS_REGION }} update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }}
           IFS=',' read -ra MANIFESTS <<< "${{ inputs.K8S_MANIFESTS_PATHS }}"
           for manifest in "${MANIFESTS[@]}"; do
             kubectl apply -f $manifest
