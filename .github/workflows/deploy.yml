@@ -12,6 +12,9 @@ on:
       K8S_MANIFESTS_PATHS:
         required: true
         type: string
+    secrets:
+      REUSABLE_WORKFLOW_PAT:
+        required: true
 
 jobs:
   deploy:
@@ -20,6 +23,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.REUSABLE_WORKFLOW_PAT }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
