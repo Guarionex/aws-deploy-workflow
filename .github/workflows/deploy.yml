@@ -17,22 +17,26 @@ on:
         required: true
       DOCKER_USERNAME:
         required: true
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_ACCOUNT_ID:
+        required: true
+      AWS_REGION:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+      EKS_CLUSTER_NAME:
+        required: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: AWS
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.REUSABLE_WORKFLOW_PAT }}
-
-      - name: Print AWS region
-        run: |
-          echo "AWS_REGION=${{ secrets.AWS_REGION }}"
-          echo "EKS_CLUSTER_NAME=${{ secrets.EKS_CLUSTER_NAME }}"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
